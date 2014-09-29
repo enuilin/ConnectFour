@@ -1,0 +1,40 @@
+package cosc405.main;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import cosc405.bo.Board;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		Board board = new Board();
+		boolean ourTurn = true;
+		boolean gameOver = false;
+		
+		System.out.println("Would you like to move first? Enter Y or N.");
+		
+		Scanner in = new Scanner(System.in);
+		
+		if (in.next().equals("Y")) {
+			board.addPiece(in.nextInt() % 7);
+		} else {
+			Random rand = new Random();
+			board.addPiece(rand.nextInt() % 7);
+			ourTurn = false;
+			
+		}
+		
+		while (gameOver == false) {
+			if (ourTurn) {
+				Minimax.minimax(board., 0, 0);
+			} else {
+				
+			}
+		}
+		
+		
+	}
+
+}

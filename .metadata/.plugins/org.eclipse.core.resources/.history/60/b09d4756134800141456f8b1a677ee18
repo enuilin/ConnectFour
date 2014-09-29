@@ -1,0 +1,19 @@
+package cosc405.bo;
+
+public class Board {
+
+	private int[][] state;
+	
+	public Board() {
+		state = new int[6][7];
+		initialize();
+	}
+	
+	private void initialize() {
+		
+	}
+	
+	public void addPiece(int place) {
+		
+	}
+}
