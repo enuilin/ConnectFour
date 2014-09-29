@@ -1,0 +1,11 @@
+package cosc405.main;
+
+import cosc405.bo.Result;
+
+public class Minimax {
+	
+	public Result minimax(int[][] state, int level, int decision) {
+		return null;
+	}
+
+}
