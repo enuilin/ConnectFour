@@ -19,10 +19,10 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		
 		if (in.next().equals("Y")) {
-			board.addPiece(in.nextInt() % 7);
+			board.addPiece(in.nextInt() % 7, false);
 		} else {
 			Random rand = new Random();
-			board.addPiece(rand.nextInt() % 7);
+			board.addPiece(rand.nextInt() % 7, true);
 			ourTurn = false;
 		}
 		
@@ -30,12 +30,12 @@ public class Main {
 			if (ourTurn) {
 				int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
 				
-				board.addPiece(decision);
+				board.addPiece(decision, ourTurn);
 				ourTurn = false;
 				board.print();
 			} else {
 				System.out.println("Enter number of row you wish to put your piece in");
-				board.addPiece(in.nextInt());
+				board.addPiece(in.nextInt(), ourTurn);
 				ourTurn = true;
 				board.print();
 			}
