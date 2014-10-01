@@ -15,7 +15,7 @@ public class Minimax {
 		
 		results = new ArrayList<Result>();
 		if (level==3) {
-			return new Result(HeuristicCalc.calc(), decision);
+			return new Result(HeuristicCalc.calc(state), decision);
 			
 		} else if (level %2 ==0) {
 			for (int i = 0; i<7 ; i++) {
