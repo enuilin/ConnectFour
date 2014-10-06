@@ -3,8 +3,8 @@
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="cosc405.bo.Result"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="cosc405.bo.Board"/>
 <fullyQualifiedTypeName name="cosc405.heuristic.HeuristicCalc"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="cosc405.bo.Board"/>
 </qualifiedTypeNameHistroy>

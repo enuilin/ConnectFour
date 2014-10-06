@@ -1,0 +1,15 @@
+package cosc405.main;
+
+import cosc405.bo.Board;
+/**
+ * Testing framework for AI vs AI
+ * @author Annie
+ *
+ */
+public class Test {
+
+	public static void main(String[] args) {
+		Game game = new Game(1);
+		game.start();
+	}
+}

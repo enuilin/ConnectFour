@@ -1,0 +1,67 @@
+package cosc405.bo;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import cosc405.main.Minimax;
+
+public class Game {
+	private int numAI;
+	Board board;
+	Player player1;
+	Player player2;
+	boolean gameOver;
+	boolean ourTurn;
+	
+	public Game(int numAI) {
+		this.numAI = numAI;
+		this.board = new Board();
+		createPlayers();
+		gameOver = false;
+		ourTurn = false;
+		
+	}
+	
+	private void createPlayers(){
+		player1 = new Player();
+		if (numAI !=1) {
+			player2 = new Player();
+		} 
+	}
+	
+	public void start() {
+		Scanner in = new Scanner(System.in);
+		
+		//if playing against human
+		if (player2==null) {
+			
+			System.out.println("Would you like to move first? Enter Y or N.");	
+			
+			if (in.next().equals("Y")) {
+				board.addPiece(in.nextInt() % 7, false);
+				board.print();
+			} else {
+				board = player1.initialPlay(board);
+				board.print();
+			}
+			
+			while (gameOver == false) {
+				if (ourTurn) {
+					board = player1.play(board);
+					board.print();
+				} else {
+					System.out.println("Enter number of column you wish to put your piece in");
+					board.addPiece(in.nextInt(), false);
+					board.print();
+				}
+			}
+			
+		//if playing AI against AI (particularly for testing purposes
+		} else {
+			//players share a board?? but the values are coded numerically!
+			
+		}
+	}
+	
+	
+}
