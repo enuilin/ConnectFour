@@ -40,7 +40,9 @@ public class Main {
 				board.print();
 			} else {
 				System.out.println("Enter number of column you wish to put your piece in");
-
+<<<<<<< HEAD
+				board.addPiece(in.nextInt(), ourTurn);
+=======
 				playerInput = in.nextInt();
 				validList = board.validPlay();
 				validMove = false;
@@ -56,6 +58,7 @@ public class Main {
 					}
 				}
 				board.addPiece(playerInput, ourTurn);
+>>>>>>> 7f6a34a29b37a9f2f2b875650b35a4c18565a54c
 				ourTurn = true;
 				board.print();
 			}

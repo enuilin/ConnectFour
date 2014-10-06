@@ -18,10 +18,10 @@ public class HeuristicCalc {
 					score = score + sum/5;
 				}
 				if (sum == 4) {
-					score = score - 100;
+					score = score - 200;
 				}
 				if (sum == 20) {
-					score = score + 200;
+					score = score + 100;
 				}
 			}
 		}
@@ -30,7 +30,7 @@ public class HeuristicCalc {
 			for (int y = 0; y <= 2; y++) {
 				//gather test block of size 4
 				for (int z = 0; z <= 3; z++) {
-					test[z] = state[y][x];
+					test[z] = state[y+z][x];
 				}
 				//evaluate
 				int sum = sum(test);
@@ -38,10 +38,10 @@ public class HeuristicCalc {
 					score = score + sum/5;
 				}
 				if (sum == 4) {
-					score = score - 100;
+					score = score - 200;
 				}
 				if (sum == 20) {
-					score = score + 200;
+					score = score + 100;
 				}
 			}
 		}

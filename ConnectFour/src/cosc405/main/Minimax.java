@@ -13,13 +13,39 @@ public class Minimax {
 	
 	public Result minimax(int[][] state, int level, int decision) {
 		
+		int row = 5;
+		boolean placed = false; //should not be relevant.  usage should be precluded by validPlay()
+		while (row >= 0 && placed == false) {
+			if (state[row][decision] == 0) {
+				if (level%2 == 0) {
+					state[row][decision] = 5;
+					placed = true;
+				} else if (level%2 == 1) {
+					state[row][decision] = 1;
+					placed = true;
+				}
+			} else {
+				row--;
+			}
+		}
+		if (placed == false) {
+			System.out.println("Something has gone wrong in Board.addPiece.");
+		}
+		
+		ArrayList<Integer> valid = new ArrayList<Integer>();
+		for (int x = 0; x < 7; x++) {
+			if (state[0][x] == 0){
+				valid.add(x);
+			}
+		}
+		
 		results = new ArrayList<Result>();
-		if (level==3) {
+		if (level==MAX_LEVEL) {
 			return new Result(HeuristicCalc.calc(state), decision);
 			
 		} else if (level %2 ==0) {
-			for (int i = 0; i<7 ; i++) {
-				results.add(minimax(state, level, i));
+			for (int x: valid) {
+				results.add(minimax(state, level, x));
 			}
 			
 			Result result = new Result();
@@ -29,8 +55,8 @@ public class Minimax {
 			
 			
 		} else if (level%2==1) {
-			for (int i = 0; i<7 ; i++) {
-				results.add(minimax(state, level, i));
+			for (int x: valid) {
+				results.add(minimax(state, level, x));
 			}
 			Result result = new Result();
 			result.setDecision(decision);
