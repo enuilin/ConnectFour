@@ -13,7 +13,7 @@ public class Board {
 	public void addPiece(int place, boolean ourTurn) {
 		//be sure to utilize validPlay() first
 		//due to usage, ourTurn can be passed as level%2 in minmax procedures
-		int row = 5;
+		int row = 6;
 		boolean placed = false; //should not be relevant.  usage should be precluded by validPlay()
 		while (row >= 0 && placed == false) {
 			if (state[row][place] == 0) {
@@ -51,10 +51,10 @@ public class Board {
 	}
 	
 	public void print() {
-		for (int i = 0; i<6; i++) {
+		for (int i = 0; i<5; i++) {
 			System.out.print("| ");
-			for (int j = 0; j<7; j++) {
-				System.out.print(state[i][j] + " ");
+			for (int j = 0; j<6; j++) {
+				System.out.print(state[5-i][6-j] + " ");
 			}
 			System.out.println("| ");
 			
