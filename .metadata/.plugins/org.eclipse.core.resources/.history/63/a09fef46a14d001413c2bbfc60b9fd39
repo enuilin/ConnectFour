@@ -1,0 +1,49 @@
+package cosc405.bo;
+
+import java.util.Random;
+
+import cosc405.main.Minimax;
+
+public class Player {
+	
+	Board board;
+	boolean ourTurn;
+	boolean gameOver;
+	Minimax minimax;
+	
+	public Player() {
+		this.board = new Board();
+		this.ourTurn = true;
+		this.gameOver = false;
+		this.minimax = new Minimax();
+	}
+	
+	public Board initialPlay(Board board) {
+		Random rand = new Random();
+		board.addPiece(rand.nextInt() % 7, true);
+		return board;
+	}
+	public void play(int num, Board board) {
+		
+			
+		board.addPiece(num % 7, true);
+		ourTurn = false;
+		
+		
+		while (gameOver == false) {
+			if (ourTurn) {
+				int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
+				
+				board.addPiece(decision, ourTurn);
+				ourTurn = false;
+				board.print();
+			} else {
+				System.out.println("Enter number of column you wish to put your piece in");
+				board.addPiece(in.nextInt(), ourTurn);
+				ourTurn = true;
+				board.print();
+			}
+		}
+	}
+
+}

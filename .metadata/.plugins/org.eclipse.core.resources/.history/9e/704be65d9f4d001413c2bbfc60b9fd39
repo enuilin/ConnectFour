@@ -1,0 +1,28 @@
+package cosc405.bo;
+
+import cosc405.main.Minimax;
+
+public class Game {
+	private int numAI;
+	Board board;
+	boolean ourTurn;
+	boolean gameOver;
+	Minimax minimax;
+	
+	public Game(int numAI) {
+		this.numAI = numAI;
+		this.board = new Board();
+		this.ourTurn = true;
+		this.gameOver = false;
+		this.minimax = new Minimax();
+	}
+	
+	public void start() {
+		//if playing against human
+		if (numAI == 1) {
+			
+		}
+	}
+	
+	
+}

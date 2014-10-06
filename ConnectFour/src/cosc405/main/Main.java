@@ -34,7 +34,7 @@ public class Main {
 				ourTurn = false;
 				board.print();
 			} else {
-				System.out.println("Enter number of row you wish to put your piece in");
+				System.out.println("Enter number of column you wish to put your piece in");
 				board.addPiece(in.nextInt(), ourTurn);
 				ourTurn = true;
 				board.print();

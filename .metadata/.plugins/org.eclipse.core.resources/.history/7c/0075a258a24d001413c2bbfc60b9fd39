@@ -1,0 +1,64 @@
+package cosc405.bo;
+
+import java.util.ArrayList;
+
+public class Board {
+
+	private int[][] state;
+	
+	public Board() {
+		state = new int[6][7];
+	}
+	
+	public void addPiece(int place, boolean ourTurn) {
+		//be sure to utilize validPlay() first
+		//due to usage, ourTurn can be passed as level%2 in minmax procedures
+		int row = 5;
+		boolean placed = false; //should not be relevant.  usage should be precluded by validPlay()
+		while (row >= 0 && placed == false) {
+			if (state[row][place] == 0) {
+				if (ourTurn) {
+					state[row][place] = 5;
+					placed = true;
+				} else if (!ourTurn) {
+					state[row][place] = 1;
+					placed = true;
+				}
+			} else {
+				row--;
+			}
+			if (placed == false) {
+				System.out.println("Something has gone wrong in Board.addPiece.");
+			}
+		}
+	}
+	
+	public int[][] getState() {
+		return state;
+	}
+	
+	public ArrayList<Integer> validPlay() {
+		//should be used before requesting input from human.
+		//should be used to determine which minmax branches to explore, as
+		//there is no point exploring a branch for a decision that is an illegal move
+		ArrayList<Integer> valid = new ArrayList<Integer>();
+		for (int x = 0; x < 7; x++) {
+			if (state[0][x] == 0){
+				valid.add(x);
+			}
+		}
+		return valid;
+	}
+	
+	public void print() {
+		for (int i = 0; i<6; i++) {
+			System.out.print("| ");
+			for (int j = 0; j<7; j++) {
+				System.out.print(state[i][j] + " ");
+			}
+			System.out.println("| ");
+			
+		}
+		
+	}
+}
