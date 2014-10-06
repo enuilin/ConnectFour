@@ -32,7 +32,6 @@ public class Main {
 		
 		while (gameOver == false) {
 			if (ourTurn) {
-				gameOver = board.checkIfWinner();
 				int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
 				
 				board.addPiece(decision, ourTurn);
@@ -58,9 +57,11 @@ public class Main {
 				board.addPiece(playerInput, ourTurn);
 				ourTurn = true;
 				board.print();
+				gameOver = board.checkIfWinner();
 			}
 		}
-		
+		System.out.println(board.getWinner() + " wins!!");
+		board.print();
 		
 	}
 
