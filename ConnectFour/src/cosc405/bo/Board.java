@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Board {
 
 	private int[][] state;
+	private String winner;
 	
 	public Board() {
 		state = new int[6][7];
+		winner = "CPU";
 	}
 	
 	public void addPiece(int place, boolean ourTurn) {
@@ -38,6 +40,10 @@ public class Board {
 		return state;
 	}
 	
+	public String getWinner() {
+		return winner;
+	}
+	
 	public ArrayList<Integer> validPlay() {
 		//should be used before requesting input from human.
 		//should be used to determine which minmax branches to explore, as
@@ -61,5 +67,71 @@ public class Board {
 			
 		}
 		
+	}
+
+	public boolean checkIfWinner() {
+		int winningMove = -1;
+		int testSum;
+		boolean canWin = false;
+		int row;
+		
+		int[] test = new int[4];
+		//check horizontals
+		for (int x = 0; x <= 3; x++) {
+			for (int y = 0; y <= 5; y++) {
+				//gather test block of size 4
+				for (int z = 0; z <= 3; z++) {
+					test[z] = state[y][x+z];
+				}
+				testSum = 0;
+				for (int w = 0; w <= 3; w++) {
+					testSum = testSum + test[w];
+				}
+				if (testSum == 15) {
+					for (int i:test) {
+						if (i == 0) {
+							if (y == 5 || state[y+1][x+i] != 0) {
+								winningMove = x+i;
+								canWin = true;
+							}
+							
+							//maybeWinColumn = x+i;
+						}
+					}
+//					row = 5;
+//					while (row >= 0 && state[row][maybeWinColumn] != 0) {
+//							row--;
+//					}
+//					if (row == y) {
+//						canWin = true;
+//						winningMove = maybeWinColumn;
+//					}
+				} else if (testSum == 4) {
+					winner = "Player";
+					return true;
+				}
+			}
+		}
+		//check verticals
+		for (int x = 0; x <= 6; x ++) {
+			for (int y = 0; y <= 2; y++) {
+				//gather test block of size 4
+				for (int z = 0; z <= 3; z++) {
+					test[z] = state[y+z][x];
+				}
+				testSum = 0;
+				for (int w = 0; w <= 3; w++) {
+					testSum = testSum + test[w];
+				}
+				if (testSum == 15) {
+					winningMove = x;
+					canWin = true;
+				} else if (testSum == 4) {
+					winner = "Player";
+					return true;
+				}
+			}
+		}
+		return canWin;
 	}
 }
