@@ -27,9 +27,10 @@ public class Board {
 			} else {
 				row--;
 			}
-			if (placed == false) {
-				System.out.println("Something has gone wrong in Board.addPiece.");
-			}
+			
+		}
+		if (placed == false) {
+			System.out.println("Something has gone wrong in Board.addPiece.");
 		}
 	}
 	
