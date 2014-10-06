@@ -73,8 +73,7 @@ public class Minimax {
 	
 	private Result max(List<Result> list) {
 		
-		Collections.sort(list);
-		return list.get(0);
+		return null;
 	
 	}
 	private Result min(List<Result> list) {
