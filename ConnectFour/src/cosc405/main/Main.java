@@ -40,6 +40,7 @@ public class Main {
 				board.print();
 			} else {
 				System.out.println("Enter number of column you wish to put your piece in");
+
 				playerInput = in.nextInt();
 				validList = board.validPlay();
 				validMove = false;

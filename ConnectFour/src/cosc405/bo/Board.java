@@ -68,6 +68,42 @@ public class Board {
 		}
 		
 	}
+	
+	//replaces all numerical values with 1 and 2 (for player numbers)
+	public void printNeutral() {
+		//5s will always represent p1
+		//1 will always represent p2
+		for (int i = 0; i<6; i++) {
+			System.out.print("| ");
+			for (int j = 0; j<7; j++) {
+				if (state[i][j] == 5) {
+					System.out.print(1 + " ");
+				} else if (state[i][j] == 1) {
+					System.out.print(2 + " ");
+				} else if (state[i][j] == 0) {
+					System.out.print(0 + " ");
+				}
+				
+			}
+			System.out.println("| ");
+			
+		}
+		
+		
+	}
+	//for AI-- flips around values in the board
+	public void flip() {
+		for (int i =0; i<6; i++) {
+			for (int j = 0; j<7; j++) {
+				if (state[i][j] == 5) {
+					state[i][j] = 1;
+				} else if (state[i][j] == 1) {
+					state[i][j] = 5;
+				}
+					
+			}
+		}
+	}
 
 	public boolean checkIfWinner() {
 		int winningMove = -1;
@@ -133,5 +169,6 @@ public class Board {
 			}
 		}
 		return canWin;
+
 	}
 }

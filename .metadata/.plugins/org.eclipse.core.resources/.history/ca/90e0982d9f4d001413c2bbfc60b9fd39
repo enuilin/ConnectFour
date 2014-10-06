@@ -1,0 +1,12 @@
+package cosc405.bo;
+
+public class Game {
+	private int numAI;
+	
+	public Game(int numAI) {
+		this.numAI = numAI;
+	}
+	
+	
+	
+}

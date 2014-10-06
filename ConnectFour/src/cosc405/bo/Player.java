@@ -1,0 +1,30 @@
+package cosc405.bo;
+
+import java.util.Random;
+
+import cosc405.main.Minimax;
+
+public class Player {
+
+	Minimax minimax;
+
+	public Player() {
+		this.minimax = new Minimax();
+	}
+
+	public Board initialPlay(Board board) {
+		Random rand = new Random();
+		board.addPiece(rand.nextInt() % 7, true);
+		return board;
+	}
+
+	public Board play(Board board) {
+
+		int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
+		//it's always *our turn" in the eyes of the player
+		board.addPiece(decision, true);
+		return board;
+
+	}
+
+}
