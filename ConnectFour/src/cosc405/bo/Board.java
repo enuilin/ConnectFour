@@ -168,6 +168,9 @@ public class Board {
 				}
 			}
 		}
+		if (canWin) {
+			addPiece(winningMove, true);
+		}
 		return canWin;
 
 	}
