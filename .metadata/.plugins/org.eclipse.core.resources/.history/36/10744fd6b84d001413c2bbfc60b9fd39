@@ -32,9 +32,12 @@ public class Main {
 		
 		while (gameOver == false) {
 			if (ourTurn) {
+<<<<<<< HEAD
 				gameOver = board.checkIfWinner();
 				int decision = minimax.minimax(board.getState(), 0, -1).getDecision();
-
+=======
+				int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
+>>>>>>> 6ddbbcdf7f40b906c42846df7d0b3c56bae1a119
 				
 				board.addPiece(decision, ourTurn);
 				ourTurn = false;
