@@ -51,10 +51,7 @@ public class Minimax {
 
 		} else if (level % 2 == 0) {
 			for (int x : valid) {
-				Result r = minimax(state, level+1,x);
-				results.add(r);
-//				results.add(result);
-				results.size();
+				results.add(minimax(state, level + 1, x));
 			}
 
 			Result result = new Result();
@@ -73,7 +70,6 @@ public class Minimax {
 		}
 
 		// should not ever hit this
-		System.out.println("returning null");
 		return null;
 	}
 

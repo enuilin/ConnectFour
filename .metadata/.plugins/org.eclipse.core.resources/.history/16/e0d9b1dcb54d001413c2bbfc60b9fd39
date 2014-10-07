@@ -32,12 +32,11 @@ public class Minimax {
 					row--;
 				}
 			}
-			if (placed == false) {
-				System.out.println("Something has gone wrong in Board.addPiece.");
-			}
-
 		}
-		
+		if (placed == false) {
+			System.out.println("Something has gone wrong in Board.addPiece.");
+		}
+
 		ArrayList<Integer> valid = new ArrayList<Integer>();
 		for (int x = 0; x < 7; x++) {
 			if (state[0][x] == 0) {
@@ -51,10 +50,7 @@ public class Minimax {
 
 		} else if (level % 2 == 0) {
 			for (int x : valid) {
-				Result r = minimax(state, level+1,x);
-				results.add(r);
-//				results.add(result);
-				results.size();
+				results.add(minimax(state, level + 1, x));
 			}
 
 			Result result = new Result();
@@ -73,7 +69,6 @@ public class Minimax {
 		}
 
 		// should not ever hit this
-		System.out.println("returning null");
 		return null;
 	}
 
