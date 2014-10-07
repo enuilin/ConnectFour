@@ -17,6 +17,7 @@ public class Main {
 		int playerInput;
 		ArrayList<Integer> validList;
 		boolean validMove;
+		int[][] testState;
 		
 		System.out.println("Would you like to move first? Enter Y or N.");
 		
@@ -24,17 +25,20 @@ public class Main {
 		
 		if (in.next().equals("Y")) {
 			board.addPiece(in.nextInt() % 7, false);
+			board.print();
 		} else {
 			Random rand = new Random();
-			board.addPiece(rand.nextInt() % 7, true);
+			board.addPiece(Math.abs(rand.nextInt()) % 7, true);
 			ourTurn = false;
+			board.print();
 		}
 		
 		while (gameOver == false) {
 			if (ourTurn) {
-				gameOver = board.checkIfWinner();
-				int decision = minimax.minimax(board.getState(), 0, -1).getDecision();
-				System.out.println("decision is " + decision);
+				//gameOver = board.checkIfWinner();
+				testState = board.cloneArray();
+				int decision = minimax.minimax(testState, 0, -1).getDecision();
+				//System.out.println("decision is " + decision);
 				
 				board.addPiece(decision, ourTurn);
 				ourTurn = false;
@@ -60,7 +64,16 @@ public class Main {
 				ourTurn = true;
 				board.print();
 				gameOver = board.checkIfWinner();
+				if (board.getPreventFlag()) {
+					ourTurn = false;
+					board.resetPreventFlag();
+					board.print();
+				}
 			}
+			if (gameOver == false) {
+				gameOver = board.checkIfFull();
+			}
+			
 		}
 		System.out.println(board.getWinner() + " wins!!");
 		board.print();
@@ -68,3 +81,4 @@ public class Main {
 	}
 
 }
+
