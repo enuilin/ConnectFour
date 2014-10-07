@@ -19,7 +19,6 @@ public class Board {
 		boolean placed = false; // should not be relevant. usage should be
 								// precluded by validPlay()
 		while (row >= 0 && placed == false) {
-			System.out.println("blah: Row = " + row + " place = " + place);
 			if (state[row][place] == 0) {
 				System.out.println("Row = " + row + " place = " + place);
 				if (ourTurn) {

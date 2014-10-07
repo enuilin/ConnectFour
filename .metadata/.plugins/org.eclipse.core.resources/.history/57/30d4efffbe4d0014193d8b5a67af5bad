@@ -34,7 +34,7 @@ public class Main {
 			if (ourTurn) {
 				gameOver = board.checkIfWinner();
 				int decision = minimax.minimax(board.getState(), 0, -1).getDecision();
-				System.out.println("decision is " + decision);
+
 				
 				board.addPiece(decision, ourTurn);
 				ourTurn = false;

@@ -60,10 +60,8 @@ public class Minimax {
 			}
 			
 			Result result = new Result();
-			Result storeResult = max(results);
-			result.setDecision(storeResult.getDecision());
-			result.setHeuristic(storeResult.getHeuristic());
-			return result;
+			result.setDecision(max(results).getDecision());
+			result.setHeuristic(max(results).getHeuristic());
 		} else if (level % 2 == 0) {
 		
 			for (int x : valid) {

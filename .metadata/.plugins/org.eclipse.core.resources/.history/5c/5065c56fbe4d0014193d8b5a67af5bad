@@ -52,20 +52,7 @@ public class Minimax {
 		if (level == MAX_LEVEL) {
 			return new Result(HeuristicCalc.calc(state), decision);
 
-		} else if (level == 0 ){
-			for (int x: valid) {
-				Result r = minimax(state, level+1, x);
-				results.add(r);
-				results.size();
-			}
-			
-			Result result = new Result();
-			Result storeResult = max(results);
-			result.setDecision(storeResult.getDecision());
-			result.setHeuristic(storeResult.getHeuristic());
-			return result;
 		} else if (level % 2 == 0) {
-		
 			for (int x : valid) {
 				Result r = minimax(state, level+1,x);
 				System.out.println("adding result for mod 2 = 0 with decision " + r.getDecision());
@@ -78,10 +65,10 @@ public class Minimax {
 			result.setDecision(decision);
 			System.out.println("checkpoint3");
 			result.setHeuristic(max(results).getHeuristic());
-			System.out.println("checkpoint 6");
 			return result;
 
 		} else if (level % 2 == 1) {
+			System.out.println("checkpoint2");
 			for (int x : valid) {
 				results.add(minimax(state, level + 1, x));
 			}
@@ -100,6 +87,7 @@ public class Minimax {
 		Collections.sort(list);
 		Result r = list.get(0);
 		results.clear();
+		System.out.println("checkpoint 4");
 		return r;
 
 	}
@@ -107,6 +95,7 @@ public class Minimax {
 	private Result min(List<Result> list) {
 		Collections.sort(list);
 		Result r = list.get(list.size()-1);
+		System.out.println("checkpoint 5");
 		results.clear();
 		return r;
 	}

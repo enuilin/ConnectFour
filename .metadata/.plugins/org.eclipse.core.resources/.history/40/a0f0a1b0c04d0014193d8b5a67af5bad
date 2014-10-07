@@ -63,7 +63,6 @@ public class Minimax {
 			Result storeResult = max(results);
 			result.setDecision(storeResult.getDecision());
 			result.setHeuristic(storeResult.getHeuristic());
-			return result;
 		} else if (level % 2 == 0) {
 		
 			for (int x : valid) {

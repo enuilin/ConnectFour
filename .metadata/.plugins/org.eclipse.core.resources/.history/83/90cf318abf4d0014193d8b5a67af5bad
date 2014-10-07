@@ -52,20 +52,7 @@ public class Minimax {
 		if (level == MAX_LEVEL) {
 			return new Result(HeuristicCalc.calc(state), decision);
 
-		} else if (level == 0 ){
-			for (int x: valid) {
-				Result r = minimax(state, level+1, x);
-				results.add(r);
-				results.size();
-			}
-			
-			Result result = new Result();
-			Result storeResult = max(results);
-			result.setDecision(storeResult.getDecision());
-			result.setHeuristic(storeResult.getHeuristic());
-			return result;
 		} else if (level % 2 == 0) {
-		
 			for (int x : valid) {
 				Result r = minimax(state, level+1,x);
 				System.out.println("adding result for mod 2 = 0 with decision " + r.getDecision());
