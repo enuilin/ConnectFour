@@ -15,7 +15,14 @@ public class HeuristicCalc {
 				//evaluate
 				int sum = sum(test);
 				if (sum!=0 && (sum%5) == 0) {
-					score = score + sum/5;
+					//score = score + sum/5;
+					if (sum/5 == 1) {
+						score = score + 1;
+					} else if (sum/5 == 2) {
+						score = score + 3;
+					} else if (sum/5 == 3) {
+						score = score + 13;
+					}
 				}
 				if (sum == 4) {
 					score = score - 200;
@@ -35,7 +42,13 @@ public class HeuristicCalc {
 				//evaluate
 				int sum = sum(test);
 				if (sum!=0 && (sum%5) == 0) {
-					score = score + sum/5;
+					if (sum/5 == 1) {
+						score = score + 1;
+					} else if (sum/5 == 2) {
+						score = score + 3;
+					} else if (sum/5 == 3) {
+						score = score + 13;
+					}
 				}
 				if (sum == 4) {
 					score = score - 200;
@@ -50,8 +63,8 @@ public class HeuristicCalc {
 	
 	private static int sum(int[] test) {
 		int total = 0;
-		for (int x = 0; x <= 3; x++) {
-			total = total + test[x];
+		for (int i = 0; i <= 3; i++) {
+			total = total + test[i];
 		}
 		return total;
 	}

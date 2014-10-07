@@ -6,22 +6,25 @@ public class Board {
 
 	private int[][] state;
 	private String winner;
-
+	private boolean preventFlag;
+	
 	public Board() {
 		state = new int[6][7];
 		winner = "CPU";
+		preventFlag = false;
 	}
 
 	public void addPiece(int place, boolean ourTurn) {
 		// be sure to utilize validPlay() first
 		// due to usage, ourTurn can be passed as level%2 in minmax procedures
+		System.out.println("My Move");
 		int row = 5;
 		boolean placed = false; // should not be relevant. usage should be
 								// precluded by validPlay()
 		while (row >= 0 && placed == false) {
-			System.out.println("blah: Row = " + row + " place = " + place);
+			//System.out.println("blah: Row = " + row + " place = " + place);
 			if (state[row][place] == 0) {
-				System.out.println("Row = " + row + " place = " + place);
+				//System.out.println("Row = " + row + " place = " + place);
 				if (ourTurn) {
 					state[row][place] = 5;
 					placed = true;
@@ -32,9 +35,10 @@ public class Board {
 			} else {
 				row--;
 			}
-			if (placed == false) {
-				System.out.println("Something has gone wrong in board.addPiece().");
-			}
+			
+		}
+		if (placed == false) {
+		//	System.out.println("Something has gone wrong in board.addPiece().");
 		}
 
 	}
@@ -114,7 +118,9 @@ public class Board {
 		int testSum;
 		boolean canWin = false;
 		int row;
-
+		boolean canPrevent = false;
+		int preventMove = -1;
+		
 		int[] test = new int[4];
 		// check horizontals
 		for (int x = 0; x <= 3; x++) {
@@ -128,8 +134,8 @@ public class Board {
 					testSum = testSum + test[w];
 				}
 				if (testSum == 15) {
-					for (int i : test) {
-						if (i == 0) {
+					for (int i = 0; i < 4; i++) {
+						if (test[i] == 0) {
 							if (y == 5 || state[y + 1][x + i] != 0) {
 								winningMove = x + i;
 								canWin = true;
@@ -149,6 +155,15 @@ public class Board {
 				} else if (testSum == 4) {
 					winner = "Player";
 					return true;
+				} else if (testSum == 3) {
+					for (int i = 0; i < 4; i++) {
+						if (test[i] == 0) {
+							if (y == 5 || state[y + 1][x + i] != 0) {
+								preventMove = x + i;
+								canPrevent = true;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -169,13 +184,50 @@ public class Board {
 				} else if (testSum == 4) {
 					winner = "Player";
 					return true;
+				} else if (testSum == 3) {
+					preventMove = x;
+					canPrevent = true;
 				}
 			}
 		}
 		if (canWin) {
 			addPiece(winningMove, true);
+		} else if (canPrevent) {
+			addPiece(preventMove, true);
+			preventFlag = true;
 		}
 		return canWin;
+	}
+	
+	public boolean getPreventFlag() {
+		return preventFlag;
+	}
+	
+	public void resetPreventFlag() {
+		preventFlag = false;
+	}
+	
+	public int[][] cloneArray() {
+		int[][] clone = new int[6][7];
+		for (int x = 0; x < 6; x++) {
+			for (int y = 0; y < 7; y++) {
+				clone[x][y] = state[x][y];
+			}
+		}
+		return clone;
+	}
 
+	public boolean checkIfFull() {
+		ArrayList<Integer> valid = new ArrayList<Integer>();
+		for (int x = 0; x < 7; x++) {
+			if (state[0][x] == 0) {
+				valid.add(x);
+			}
+		}
+		if (valid.size() == 0) {
+			winner = "It's a tie! Nobody";
+			return true;
+		}
+		return false;
 	}
 }
