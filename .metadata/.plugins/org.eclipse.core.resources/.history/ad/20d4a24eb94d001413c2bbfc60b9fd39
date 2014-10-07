@@ -11,7 +11,7 @@ import cosc405.heuristic.HeuristicCalc;
 
 public class Minimax {
 	private int MAX_LEVEL = 3;
-	private List<Result> results = new ArrayList<Result>();
+	private List<Result> results;
 
 	public Result minimax(int[][] state, int level, int decision) {
 
@@ -45,7 +45,7 @@ public class Minimax {
 			}
 		}
 
-
+		results = new ArrayList<Result>();
 		if (level == MAX_LEVEL) {
 			return new Result(HeuristicCalc.calc(state), decision);
 
@@ -78,18 +78,16 @@ public class Minimax {
 	}
 
 	private Result max(List<Result> list) {
+		list.get(0);
 		Collections.sort(list);
-		Result r = list.get(0);
-		results.clear();
-		return r;
+		return list.get(0);
 
 	}
 
 	private Result min(List<Result> list) {
+
 		Collections.sort(list);
-		Result r = list.get(list.size()-1);
-		results.clear();
-		return r;
+		return list.get(list.size());
 	}
 
 }

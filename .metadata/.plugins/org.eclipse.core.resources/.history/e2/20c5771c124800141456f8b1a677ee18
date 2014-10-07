@@ -1,9 +1,0 @@
-package cosc405.main;
-
-public class Minimax {
-	
-	public static void main(String[] args) {
-		
-	}
-
-}

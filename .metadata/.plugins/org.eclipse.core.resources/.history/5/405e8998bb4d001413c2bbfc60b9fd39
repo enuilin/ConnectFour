@@ -32,7 +32,8 @@ public class Board {
 				row--;
 			}
 			if (placed == false) {
-				System.out.println("Something has gone REALLY wrong in Board.addPiece.");
+				System.out
+						.println("Something has gone wrong in Board.addPiece.");
 			}
 		}
 

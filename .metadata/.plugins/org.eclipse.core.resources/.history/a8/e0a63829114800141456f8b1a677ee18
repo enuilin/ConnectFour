@@ -1,9 +1,0 @@
-package cosc405.heuristic;
-
-public class Result {
-
-	private double heuristic;
-	private int path;
-	
-	
-}
