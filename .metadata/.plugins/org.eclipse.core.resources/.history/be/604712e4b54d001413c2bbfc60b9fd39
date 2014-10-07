@@ -33,7 +33,7 @@ public class Main {
 		while (gameOver == false) {
 			if (ourTurn) {
 				gameOver = board.checkIfWinner();
-				int decision = minimax.minimax(board.getState(), 0, -1).getDecision();
+				int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
 				
 				board.addPiece(decision, ourTurn);
 				ourTurn = false;

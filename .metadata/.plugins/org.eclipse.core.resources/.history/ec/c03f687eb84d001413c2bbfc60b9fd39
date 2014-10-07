@@ -53,7 +53,8 @@ public class Minimax {
 			for (int x : valid) {
 				Result r = minimax(state, level+1,x);
 				results.add(r);
-//				results.add(result);
+				Result result = new Result(5,0);
+				results.add(result);
 				results.size();
 			}
 
