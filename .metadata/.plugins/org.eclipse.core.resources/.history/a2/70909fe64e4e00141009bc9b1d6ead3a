@@ -73,7 +73,8 @@ public class Board {
 			}
 			System.out.println("| ");
 		}
-		
+		//column indicator
+		System.out.println("| 0 1 2 3 4 5 6 |");
 	}
 	
 	public void print() {
@@ -89,11 +90,7 @@ public class Board {
 				}
 			}
 			System.out.println("| ");
-			
 		}
-		//column indicator
-		System.out.println("-----------------");
-		System.out.println("  0 1 2 3 4 5 6  ");
 	}
 
 	// replaces all numerical values with 1 and 2 (for player numbers)
