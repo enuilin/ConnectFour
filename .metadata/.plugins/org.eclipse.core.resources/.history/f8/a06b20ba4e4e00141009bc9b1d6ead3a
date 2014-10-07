@@ -24,7 +24,7 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		
 		if (in.next().equals("Y")) {
-			System.out.println("Please enter the column you wish to place your piece in (the board is 0 indexed): ");
+			System.out.println("Please enter the column you wish to place your piece in: ");
 			board.addPiece(in.nextInt() % 7, false);
 			board.print();
 		} else {

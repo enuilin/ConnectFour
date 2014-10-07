@@ -73,7 +73,6 @@ public class Board {
 			}
 			System.out.println("| ");
 		}
-		
 	}
 	
 	public void print() {
@@ -85,15 +84,11 @@ public class Board {
 				} else if (state[i][j] == 1) {
 					System.out.print("P ");
 				} else if (state[i][j] == 0) {
-					System.out.print("- ");
+					System.out.print("  ");
 				}
 			}
 			System.out.println("| ");
-			
 		}
-		//column indicator
-		System.out.println("-----------------");
-		System.out.println("  0 1 2 3 4 5 6  ");
 	}
 
 	// replaces all numerical values with 1 and 2 (for player numbers)

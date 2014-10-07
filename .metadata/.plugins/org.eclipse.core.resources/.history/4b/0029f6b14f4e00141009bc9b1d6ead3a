@@ -20,7 +20,7 @@ public class Player {
 
 	public Board play(Board board) {
 
-		int decision = minimax.minimax(board.getState(), 0, -1).getDecision();
+		int decision = minimax.minimax(board.getState(), 0, 0).getDecision();
 		//it's always *our turn" in the eyes of the player
 		board.addPiece(decision, true);
 		return board;
