@@ -20,7 +20,7 @@ public class Board {
 								// precluded by validPlay()
 		while (row >= 0 && placed == false) {
 			if (state[row][place] == 0) {
-				System.out.println("Row = " + row + " place = " + place);
+				System.out.println("Row = " + row + " place = " + place + "dafsdf");
 				if (ourTurn) {
 					state[row][place] = 5;
 					placed = true;
