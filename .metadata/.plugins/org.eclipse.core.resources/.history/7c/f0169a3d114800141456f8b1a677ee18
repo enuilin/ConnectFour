@@ -1,9 +1,0 @@
-package cosc405.heuristic;
-
-public class HeuristicCalc {
-
-	public double calc() {
-		
-		return 0;
-	}
-}

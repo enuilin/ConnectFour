@@ -11,7 +11,7 @@ import cosc405.heuristic.HeuristicCalc;
 
 public class Minimax {
 	private int MAX_LEVEL = 3;
-	private List<Result> results;
+	private List<Result> results = new ArrayList<Result>();
 
 	public Result minimax(int[][] state, int level, int decision) {
 
@@ -20,6 +20,7 @@ public class Minimax {
 			boolean placed = false; // should not be relevant. usage should be
 									// precluded by validPlay()
 			while (row >= 0 && placed == false) {
+				System.out.println("row = " + row + "decision = " + decision);
 				if (state[row][decision] == 0) {
 					if (level % 2 == 0) {
 						state[row][decision] = 5;
@@ -31,10 +32,12 @@ public class Minimax {
 				} else {
 					row--;
 				}
+				
 			}
 			if (placed == false) {
-				System.out.println("Something has gone wrong in Board.addPiece.");
+				System.out.println("Something has gone wrong in Minimax.minimax");
 			}
+			
 
 		}
 		
@@ -45,13 +48,27 @@ public class Minimax {
 			}
 		}
 
-		results = new ArrayList<Result>();
+		System.out.println("checkpoint");
 		if (level == MAX_LEVEL) {
 			return new Result(HeuristicCalc.calc(state), decision);
 
+		} else if (level == 0 ){
+			for (int x: valid) {
+				Result r = minimax(state, level+1, x);
+				results.add(r);
+				results.size();
+			}
+			
+			Result result = new Result();
+			Result storeResult = max(results);
+			result.setDecision(storeResult.getDecision());
+			result.setHeuristic(storeResult.getHeuristic());
+			return result;
 		} else if (level % 2 == 0) {
+		
 			for (int x : valid) {
 				Result r = minimax(state, level+1,x);
+				System.out.println("adding result for mod 2 = 0 with decision " + r.getDecision());
 				results.add(r);
 //				results.add(result);
 				results.size();
@@ -59,7 +76,9 @@ public class Minimax {
 
 			Result result = new Result();
 			result.setDecision(decision);
+			System.out.println("checkpoint3");
 			result.setHeuristic(max(results).getHeuristic());
+			System.out.println("checkpoint 6");
 			return result;
 
 		} else if (level % 2 == 1) {
@@ -71,23 +90,25 @@ public class Minimax {
 			result.setHeuristic(min(results).getHeuristic());
 			return result;
 		}
-
+		
 		// should not ever hit this
 		System.out.println("returning null");
 		return null;
 	}
 
 	private Result max(List<Result> list) {
-		list.get(0);
 		Collections.sort(list);
-		return list.get(0);
+		Result r = list.get(0);
+		results.clear();
+		return r;
 
 	}
 
 	private Result min(List<Result> list) {
-
 		Collections.sort(list);
-		return list.get(list.size());
+		Result r = list.get(list.size()-1);
+		results.clear();
+		return r;
 	}
 
 }
