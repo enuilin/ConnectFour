@@ -10,21 +10,20 @@ public class Board {
 	
 	public Board() {
 		state = new int[6][7];
+		//winner and preventFlag are used in conjunction with checkIfWinner()
 		winner = "CPU";
 		preventFlag = false;
 	}
 
 	public void addPiece(int place, boolean ourTurn) {
+		// adds token to lowest unoccupied row in given column "place"
 		// be sure to utilize validPlay() first
 		// due to usage, ourTurn can be passed as level%2 in minmax procedures
-		System.out.println("My Move");
 		int row = 5;
 		boolean placed = false; // should not be relevant. usage should be
 								// precluded by validPlay()
 		while (row >= 0 && placed == false) {
-			//System.out.println("blah: Row = " + row + " place = " + place);
 			if (state[row][place] == 0) {
-				//System.out.println("Row = " + row + " place = " + place);
 				if (ourTurn) {
 					state[row][place] = 5;
 					placed = true;
@@ -35,12 +34,7 @@ public class Board {
 			} else {
 				row--;
 			}
-			
 		}
-		if (placed == false) {
-		//	System.out.println("Something has gone wrong in board.addPiece().");
-		}
-
 	}
 
 	public int[][] getState() {
@@ -52,6 +46,7 @@ public class Board {
 	}
 
 	public ArrayList<Integer> validPlay() {
+		// returns a list of valid token placements
 		// should be used before requesting input from human.
 		// should be used to determine which minmax branches to explore, as
 		// there is no point exploring a branch for a decision that is an
@@ -131,14 +126,18 @@ public class Board {
 			}
 		}
 	}
-
+	
+	// determines multiple end-of-turn situations
+	// Priority 1: See if opponent won.
+	// Priority 2: See if we can win.
+	// Priority 3: See if we can prevent the opponent from winning.
 	public boolean checkIfWinner() {
-		int winningMove = -1;
-		int testSum;
-		boolean canWin = false;
-		int row;
+		int winningMove = -1; 	// represents winning column
+		int testSum;			// holds sum of test array for testing purposes
+		boolean canWin = false;	
+		int row;				// row being examined
 		boolean canPrevent = false;
-		int preventMove = -1;
+		int preventMove = -1;	// represents column for preventing opponent win
 		
 		int[] test = new int[4];
 		// check horizontals
@@ -148,33 +147,29 @@ public class Board {
 				for (int z = 0; z <= 3; z++) {
 					test[z] = state[y][x + z];
 				}
+				// store sum of test array in testSum
 				testSum = 0;
 				for (int w = 0; w <= 3; w++) {
 					testSum = testSum + test[w];
 				}
+				// consider notable scenarios
 				if (testSum == 15) {
+					// if we can win, set canWin flag and record column
 					for (int i = 0; i < 4; i++) {
 						if (test[i] == 0) {
 							if (y == 5 || state[y + 1][x + i] != 0) {
 								winningMove = x + i;
 								canWin = true;
 							}
-
-							// maybeWinColumn = x+i;
 						}
 					}
-					// row = 5;
-					// while (row >= 0 && state[row][maybeWinColumn] != 0) {
-					// row--;
-					// }
-					// if (row == y) {
-					// canWin = true;
-					// winningMove = maybeWinColumn;
-					// }
+					
 				} else if (testSum == 4) {
+					// if player wins, exit function and declare winner immediately
 					winner = "Player";
 					return true;
 				} else if (testSum == 3) {
+					// if player is one move from winning, set canPrevent flag and store column
 					for (int i = 0; i < 4; i++) {
 						if (test[i] == 0) {
 							if (y == 5 || state[y + 1][x + i] != 0) {
@@ -193,25 +188,34 @@ public class Board {
 				for (int z = 0; z <= 3; z++) {
 					test[z] = state[y + z][x];
 				}
+				// store sum of test array in testSum
 				testSum = 0;
 				for (int w = 0; w <= 3; w++) {
 					testSum = testSum + test[w];
 				}
+				// consider notable scenarios
 				if (testSum == 15) {
+					// if we can win, set canWin flag and record column
 					winningMove = x;
 					canWin = true;
 				} else if (testSum == 4) {
+					// if player wins, exit function and declare winner immediately
+					// changes "winner" variable to reflect the change
 					winner = "Player";
 					return true;
 				} else if (testSum == 3) {
+					// if player is one move from winning, set canPrevent flag and store column
 					preventMove = x;
 					canPrevent = true;
 				}
 			}
 		}
 		if (canWin) {
+			// if cpu can win, it does so
+			// the winner variable is left alone, as the default is "CPU"
 			addPiece(winningMove, true);
 		} else if (canPrevent) {
+			// if opponent win is preventable, do so and set preventFlag to notify function
 			addPiece(preventMove, true);
 			preventFlag = true;
 		}
@@ -226,6 +230,7 @@ public class Board {
 		preventFlag = false;
 	}
 	
+	// creates clone of 2d array, because 2d arrays are inconvenient
 	public int[][] cloneArray() {
 		int[][] clone = new int[6][7];
 		for (int x = 0; x < 6; x++) {
@@ -236,13 +241,16 @@ public class Board {
 		return clone;
 	}
 
+	// checks if the play board is full
 	public boolean checkIfFull() {
+		// gathers list of viable moves
 		ArrayList<Integer> valid = new ArrayList<Integer>();
 		for (int x = 0; x < 7; x++) {
 			if (state[0][x] == 0) {
 				valid.add(x);
 			}
 		}
+		// if no viable moves, respond accordingly
 		if (valid.size() == 0) {
 			winner = "It's a tie! Nobody";
 			return true;

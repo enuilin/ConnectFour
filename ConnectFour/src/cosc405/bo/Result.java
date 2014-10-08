@@ -1,6 +1,6 @@
 package cosc405.bo;
 
-public class Result implements Comparable{
+public class Result {
 
 	private double heuristic;
 	private int decision;
@@ -25,15 +25,15 @@ public class Result implements Comparable{
 		this.decision = path;
 	}
 
-	@Override
-	public int compareTo(Object o) {
-		 if(this.heuristic == ((Result)o).heuristic) {
-			 return 0;
-		 } else {
-			 return this.heuristic > ((Result)o).heuristic ? 1: -1;
-		 }
-			
-	}
+//	@Override
+//	public int compareTo(Object o) {
+//		 if(this.heuristic == ((Result)o).heuristic) {
+//			 return 0;
+//		 } else {
+//			 return this.heuristic > ((Result)o).heuristic ? 1: -1;
+//		 }
+//			
+//	}
 	
 	
 }

@@ -36,10 +36,8 @@ public class Main {
 		
 		while (gameOver == false) {
 			if (ourTurn) {
-				//gameOver = board.checkIfWinner();
-				testState = board.cloneArray();
+				testState = board.cloneArray(); // so we don't mess with the active board state
 				int decision = minimax.minimax(testState, 0, -1).getDecision();
-				//System.out.println("decision is " + decision);
 				
 				board.addPiece(decision, ourTurn);
 				ourTurn = false;
@@ -47,6 +45,8 @@ public class Main {
 			} else {
 				System.out.println("Enter number of column you wish to put your piece in");
 
+				// take player input, generate list of valid moves,
+				// make sure player move falls within list
 				playerInput = in.nextInt();
 				validList = board.validPlay();
 				validMove = false;
@@ -64,22 +64,23 @@ public class Main {
 				board.addPiece(playerInput, ourTurn);
 				ourTurn = true;
 				board.print();
-				gameOver = board.checkIfWinner();
+				// check for notable conditions
+				gameOver = board.checkIfWinner(); // if player wins or cpu can win, sets as true
+				// if checkIfWinner() triggers player win prevention by cpu, makes sure cpu doesn't take double turn
 				if (board.getPreventFlag()) {
 					ourTurn = false;
 					board.resetPreventFlag();
 					board.print();
 				}
 			}
+			// checks if tie has been reached
 			if (gameOver == false) {
 				gameOver = board.checkIfFull();
 			}
-			
 		}
+		// declares winner and prints final game state
 		System.out.println(board.getWinner() + " wins!!");
-		board.print();
-		
+		board.print();		
 	}
-
 }
 

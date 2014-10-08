@@ -11,25 +11,18 @@ import cosc405.heuristic.HeuristicCalc;
 
 public class Minimax {
 	private int MAX_LEVEL = 6;
-	private List<Result> results = new ArrayList<Result>();
-	private int[][] testState;
-	private ArrayList<Result> endResults = new ArrayList<Result>();
+	private List<Result> results = new ArrayList<Result>(); //for storing mid/bottom level results
+	private int[][] testState; //for cloning the current state because 2d arrays are inconvenient
+	private ArrayList<Result> endResults = new ArrayList<Result>(); //for storing top level results
 	
 	public Result minimax(int[][] state, int level, int decision) {
 
-//		for (int x = 0; x < 6; x++) {
-//			for (int y = 0; y < 7; y++) {
-//				testState[x][y] = state[x][y];
-//			}
-//		}
-
+		//if not called by main (decision = -1), place token
 		int row = 5;
 		if (decision >= 0) {
 			boolean placed = false; // should not be relevant. usage should be
 									// precluded by validPlay()
 			while (row >= 0 && placed == false) {
-			//	System.out.println("row = " + row + "decision = " + decision);
-				//System.out.println("Level = " + level);
 				if (state[row][decision] == 0) {
 					if (level % 2 == 0) {
 						state[row][decision] = 1;
@@ -41,15 +34,10 @@ public class Minimax {
 				} else {
 					row--;
 				}
-				
 			}
-			if (placed == false) {
-				//System.out.println("Something has gone wrong in Minimax.minimax");
-			}
-			
-
 		}
 		
+		//collect list of valid moves
 		ArrayList<Integer> valid = new ArrayList<Integer>();
 		for (int x = 0; x < 7; x++) {
 			if (state[0][x] == 0) {
@@ -57,8 +45,9 @@ public class Minimax {
 			}
 		}
 
-		//System.out.println("checkpoint");
+		//determine procedure based on level
 		if (level == MAX_LEVEL) {
+			//if bottom level, clone array and determine heuristic, returning a Result
 			testState = new int[6][7];
 			for (int x = 0; x < 6; x++) {
 				for (int y = 0; y < 7; y++) {
@@ -68,6 +57,8 @@ public class Minimax {
 			return new Result(HeuristicCalc.calc(testState), decision);
 
 		} else if (level == 0 ){
+			//if top level, evaluate and return best decision
+			//for every valid option, we clone the state and recursively call minimax
 			for (int x: valid) {
 				testState = new int[6][7];
 				for (int y = 0; y < 6; y++) {
@@ -77,11 +68,9 @@ public class Minimax {
 				}
 				Result r = minimax(testState, level+1, x);
 				endResults.add(r);
-				endResults.size();
+				//endResults.size();
 			}
-//			for (int i = 0; i < endResults.size(); i++) {
-//				System.out.print(endResults.get(i).getHeuristic() + " ");
-//			}
+
 			Result result = new Result();
 			Result storeResult = max(endResults);
 			endResults.clear();
@@ -89,7 +78,7 @@ public class Minimax {
 			result.setHeuristic(storeResult.getHeuristic());
 			return result;
 		} else if (level % 2 == 0) {
-		
+			//if even level, recursively call minimax and return maximum
 			for (int x : valid) {
 				testState = new int[6][7];
 				for (int y = 0; y < 6; y++) {
@@ -98,23 +87,18 @@ public class Minimax {
 					}
 				}
 				Result r = minimax(testState, level+1,x);
-				//System.out.println("adding result for mod 2 = 0 with decision " + r.getDecision());
 				results.add(r);
-//				results.add(result);
-				//results.size();
 			}
 
 			Result result = new Result();
 			result.setDecision(decision);
-		//	System.out.println("checkpoint3");
 			if (results.size() != 0) {
 				result.setHeuristic(max(results).getHeuristic());
 			}
-			//System.out.println("checkpoint 6, heuristic = " + result.getHeuristic());
 			return result;
 
 		} else if (level % 2 == 1) {
-			
+			//for odd levels, recursively call minimax and return minimum
 			for (int x : valid) {
 				testState = new int[6][7];
 				for (int y = 0; y < 6; y++) {
@@ -131,17 +115,12 @@ public class Minimax {
 			}
 			return result;
 		}
-		
-		// should not ever hit this
-		//System.out.println("returning null");
 		return null;
 	}
 
 	private Result max(List<Result> list) {
-//		Collections.sort(list);
-//		Result r = list.get(0);
-//		results.clear();
-//		
+		//return max value
+		
 		Result r = list.get(0);
 		int high = (int) r.getHeuristic();
 		for (int x = 1; x < list.size(); x++) {
@@ -152,13 +131,10 @@ public class Minimax {
 		}
 		results.clear();
 		return r;
-
 	}
 
 	private Result min(List<Result> list) {
-//		Collections.sort(list);
-//		Result r = list.get(list.size()-1);
-//		results.clear();
+		//return min value
 		
 		Result r = list.get(0);
 		int low = (int) r.getHeuristic();
@@ -171,5 +147,4 @@ public class Minimax {
 		results.clear();
 		return r;
 	}
-
 }
