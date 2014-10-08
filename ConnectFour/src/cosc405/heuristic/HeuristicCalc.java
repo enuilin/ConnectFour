@@ -28,7 +28,7 @@ public class HeuristicCalc {
 				}
 				if (sum == 4) {
 					//mark opponent win condition with extreme score
-					score = score - 100;
+					score = score - 150;
 				}
 				if (sum == 20) {
 					//mark self win condition with extreme score
@@ -57,7 +57,7 @@ public class HeuristicCalc {
 				}
 				if (sum == 4) {
 					//mark opponent win condition with extreme score
-					score = score - 100;
+					score = score - 150;
 				}
 				if (sum == 20) {
 					//mark self win condition with extreme score
