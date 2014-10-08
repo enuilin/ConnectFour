@@ -48,6 +48,7 @@ public class Main {
 				System.out.println("Enter number of column you wish to put your piece in");
 
 				playerInput = in.nextInt();
+				//this section checks if the user's move is valid
 				validList = board.validPlay();
 				validMove = false;
 				while (validMove == false) {

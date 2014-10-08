@@ -17,7 +17,7 @@ public class Board {
 	public void addPiece(int place, boolean ourTurn) {
 		// be sure to utilize validPlay() first
 		// due to usage, ourTurn can be passed as level%2 in minmax procedures
-		System.out.println("My Move");
+		System.out.println("Adding piece");
 		int row = 5;
 		boolean placed = false; // should not be relevant. usage should be
 								// precluded by validPlay()
@@ -77,6 +77,7 @@ public class Board {
 	}
 	
 	public void print() {
+		System.out.println("Board: ");
 		for (int i = 0; i < 6; i++) {
 			System.out.print("| ");
 			for (int j = 0; j < 7; j++) {
@@ -98,6 +99,7 @@ public class Board {
 
 	// replaces all numerical values with 1 and 2 (for player numbers)
 	public void printNeutral() {
+		System.out.println("Printing board");
 		// 5s will always represent p1
 		// 1 will always represent p2
 		for (int i = 0; i < 6; i++) {
@@ -108,7 +110,7 @@ public class Board {
 				} else if (state[i][j] == 1) {
 					System.out.print(2 + " ");
 				} else if (state[i][j] == 0) {
-					System.out.print(0 + " ");
+					System.out.print("- ");
 				}
 
 			}
